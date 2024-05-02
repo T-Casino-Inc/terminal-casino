@@ -1,13 +1,7 @@
-'use strict';
-require('dotenv').config();
-const {start} = require('./src/server.js');
-const {sequelize} = require('./src/models/index.js');
+"use strict";
+require("dotenv").config();
+const { start } = require("./src/server.js");
 
-
-sequelize.sync()
-    .then(() => {
-        start(process.env.PORT || 3001);
-    })
-    .catch(console.error);
-
+start(process.env.PORT || 3001);
 // start(process.env.PORT || 3001);
+

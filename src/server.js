@@ -53,9 +53,9 @@ app.patch("/patchM", verifyUser, async (req, res) => {
   }
 });
 
-app.get("/signup", verifyUser, async (req, res) => {
+app.post("/signup", async (req, res) => {
   const id = {
-    id: req.user.sub,
+    id: req.body.id,
   };
   try {
     await axios.post(

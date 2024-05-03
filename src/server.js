@@ -10,7 +10,6 @@ app.use(cors());
 app.use(express.json());
 
 app.get("/getBalance", verifyUser, async (req, res) => {
-  // console.log("Hello from the server", req.user);
   const id = req.user.sub.split("|")[1];
   try {
     let response = await axios.get(
@@ -24,7 +23,6 @@ app.get("/getBalance", verifyUser, async (req, res) => {
 
 app.patch("/patchG", verifyUser, async (req, res) => {
   const id = req.user.sub.split("|")[1];
-  console.log("req.body", req.body);
   const bitBalance = {
     bitBalance: req.body.bitBalance,
     bitLoss: req.body.bitLoss,
@@ -41,7 +39,6 @@ app.patch("/patchG", verifyUser, async (req, res) => {
 });
 app.patch("/patchM", verifyUser, async (req, res) => {
   const id = req.user.sub.split("|")[1];
-  console.log("req.body", req.body);
   const bitBalance = {
     bitBalance: req.body.bitBalance,
   };
@@ -61,16 +58,15 @@ app.get("/signup", verifyUser, async (req, res) => {
     id: req.user.sub,
   };
   try {
-    let response = await axios.post(
+    await axios.post(
       "https://ysekh6aolg.execute-api.us-west-2.amazonaws.com/production/users",
       id,
     );
-    console.log(response.data);
+    res.status(201);
   } catch (error) {
     res.send("error", error);
   }
 
-  console.log("the request", req);
   res.send("User properly verified, on express");
 });
 
